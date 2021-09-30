@@ -1,0 +1,33 @@
+# Prerequisites:
+1. Need a Google Cloud Project with a Datastore Datbase created
+
+2. Set the GOOGLE_CLOUD_PROJECT environment variable equal to your project ID
+ 
+3. Need to create a Service Account with at least Datastore access and create and download a service account key.
+
+4. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to your key path
+export GOOGLE_APPLICATION_CREDENTIALS=~/your-key-name.json
+
+----------------------
+
+export GOOGLE_CLOUD_PROJECT=$DEVSHELL_PROJECT_ID
+export GOOGLE_APPLICATION_CREDENTIALS=gcp-sa-key.json
+
+-----------------------
+
+# Build the program:
+go build
+
+# Run the program
+./go-pets
+
+# Use Fresh to automatically rebuild project when there are changes
+# Run Fresh from the application's folder
+go get github.com/pilu/fresh
+fresh
+
+# Build with Google Cloud Build
+gcloud builds submit --tag=gcr.io/YOUR-PROJECT-ID-HERE/go-pets:v1.0 .
+
+# To Deploy, you must set the environment variable: GOOGLE_CLOUD_PROJECT equal to your project ID.
+# You also need a Datastore database in the project where you want to run the program. 

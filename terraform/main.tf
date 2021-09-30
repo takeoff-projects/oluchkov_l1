@@ -52,6 +52,34 @@ resource "google_project_service" "enable_apigateway_service" {
   disable_on_destroy = true
 }
 
+resource "google_project_service" "resource_manager" {
+  provider = google
+  project  = var.project_id
+  service  = "cloudresourcemanager.googleapis.com"
+  disable_on_destroy = true
+}
+
+resource "google_project_service" "service_control" {
+  provider = google
+  project  = var.project_id
+  service  = "servicecontrol.googleapis.com"
+  disable_on_destroy = true
+}
+
+resource "google_project_service" "service_management" {
+  provider = google
+  project  = var.project_id
+  service  = "servicemanagement.googleapis.com"
+  disable_on_destroy = true
+}
+
+resource "google_project_service" "apis" {
+  provider = google
+  project  = var.project_id
+  service  = "cloudapis.googleapis.com"
+  disable_on_destroy = true
+}
+
 resource "google_cloud_run_service" "todoapp" {
   name     = local.service_name
   location = var.region

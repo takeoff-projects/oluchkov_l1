@@ -14,28 +14,8 @@ provider "google" {
 locals {
   service_name    = "todoapp"
   deployment_name = "todoapp"
-# index_path_file    = "index.yaml"
-# todos_worker_sa  = "serviceAccount:${google_service_account.todos_worker.email}"
 }
 
-# Create a service account
-#resource "google_service_account" "todos_worker" {
-#  account_id   = "todos-worker"
-#  display_name = "Todos Worker SA"
-#}
-#resource "google_service_account_key" "pets_worker_key" {
-#  service_account_id = google_service_account.todos_worker.name
-#  public_key_type    = "TYPE_X509_PEM_FILE"
-#}
-# Set permissions
-#resource "google_project_iam_binding" "service_permissions" {
-#  for_each = toset([
-#    "run.invoker", "datastore.owner","appengine.appAdmin"
-#  ])
-#  role       = "roles/${each.key}"
-#  members    = [local.todos_worker_sa]
-#  depends_on = [google_service_account.todos_worker]
-#}
 
 resource "google_project_service" "run" {
   provider = google
@@ -71,13 +51,6 @@ resource "google_project_service" "enable_apigateway_service" {
   service  = "apigateway.googleapis.com"
   disable_on_destroy = true
 }
-
-module "datastore" {
-  source  = "terraform-google-modules/cloud-datastore/google"
-  project = var.project_id
-  credentials = var.key
-# indexes = file(local.index_path_file)
-  }
 
 resource "google_cloud_run_service" "todoapp" {
   name     = local.service_name

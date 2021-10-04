@@ -31,3 +31,19 @@ gcloud builds submit --tag=gcr.io/YOUR-PROJECT-ID-HERE/todoapp:v1.0 .
 
 # To Deploy, you must set the environment variable: GOOGLE_CLOUD_PROJECT equal to your project ID.
 # You also need a Datastore database in the project where you want to run the program. 
+
+-------------------------------------
+#additional notes
+
+to calc capacity
+cloud.googe.com.products/calculator
+
+tf initial sample
+https://github.com/roitraining/hands-on-terraform/tree/main/gcp/getting-started
+
+ignore tf related
+https://github.com/github/gitignore/blob/master/Terraform.gitignore
+best practice - to store tfstate at bucket
+
+#db creation tf
+https://cloud.google.com/firestore/docs/solutions/automate-database-create#create_a_database_with_terraform
